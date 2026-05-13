@@ -2,7 +2,7 @@
 
 A full-stack Machine Learning web application that predicts whether a woman is diabetic or not using the **Pima Indians Diabetes Dataset** and a **Multi-Layer Perceptron (MLP)** model.
 
-The application allows users to enter medical parameters through a React frontend, sends the data to a Spring Boot backend, performs ML inference using a Python FastAPI service, and returns the prediction result.
+The application allows users to enter medical parameters through a React frontend, sends the data to a Spring Boot backend, performs ML inference using a trained Python model, and returns the prediction result.
 
 ---
 
@@ -10,12 +10,12 @@ The application allows users to enter medical parameters through a React fronten
 
 ## Frontend
 - React.js
-- Axios
 - CSS
 
 ## Backend
 - Spring Boot
 - REST API
+- Java ProcessBuilder
 
 ## Machine Learning
 - Python
@@ -23,10 +23,6 @@ The application allows users to enter medical parameters through a React fronten
 - MLPClassifier
 - Pandas
 - NumPy
-
-## Model Serving
-- FastAPI
-- Uvicorn
 
 ---
 
@@ -57,7 +53,7 @@ React Frontend
        ↓
 Spring Boot Backend
        ↓
-FastAPI ML Service
+Python ML Script
        ↓
 MLP Model Prediction
 ```
@@ -76,7 +72,7 @@ diabetes-predictor/
 ├── ml-model/
 │   ├── notebook.ipynb         # Training Notebook
 │   ├── diabetes_mlp_model.pkl
-│   └── app.py                 # FastAPI Inference Server
+│   └── predict.py             # Python Inference Script
 │
 └── README.md
 ```
@@ -100,6 +96,43 @@ The system uses the following medical parameters:
 
 ---
 
+# Backend Inference Flow
+
+The Spring Boot backend directly invokes the Python inference script using Java `ProcessBuilder`.
+
+The backend:
+
+1. Receives request data from React frontend
+2. Validates all medical inputs
+3. Executes the Python prediction script
+4. Passes all feature values as command-line arguments
+5. Reads JSON prediction output from Python
+6. Returns prediction response to frontend
+
+---
+
+# Prediction Response
+
+The backend returns:
+
+- Prediction value
+- Diagnosis result
+- Prediction probability
+- Medical guidance message
+
+Example:
+
+```json
+{
+  "prediction": 1,
+  "diagnosis": "Diabetes likely",
+  "probability": 0.87,
+  "message": "The model predicts signs associated with diabetes. Please consult a clinician for confirmation."
+}
+```
+
+---
+
 # How to Run the Project
 
 ## Clone Repository
@@ -111,19 +144,10 @@ cd diabetes-predictor
 
 ---
 
-## Run ML FastAPI Server
-
-### Install Dependencies
+## Install Python Dependencies
 
 ```bash
-pip install fastapi uvicorn scikit-learn pandas numpy joblib
-```
-
-### Start Server
-
-```bash
-cd ml-model
-uvicorn app:app --reload --port 8000
+pip install pandas numpy scikit-learn joblib
 ```
 
 ---
@@ -159,58 +183,19 @@ http://localhost:5173
 
 ---
 
-# API Endpoint
-
-## Predict Diabetes
-
-```http
-POST /api/diabetes/predict
-```
-
-### Request Body
-
-```json
-{
-  "pregnancies": 2,
-  "glucose": 120,
-  "bloodPressure": 70,
-  "skinThickness": 20,
-  "insulin": 85,
-  "bmi": 25.5,
-  "diabetesPedigreeFunction": 0.5,
-  "age": 33
-}
-```
-
-### Response
-
-```json
-{
-  "result": "Not Diabetic"
-}
-```
-
----
-
-# Model Performance
-
-| Metric | Score |
-|---|---|
-| Accuracy | ~75% to 80% |
-| Model | MLPClassifier |
-
----
 
 # Features
 
 - Full-stack ML integration
 - React form-based UI
 - Spring Boot REST API
-- FastAPI model serving
+- Python model inference integration
 - Real-time diabetes prediction
-- Clean architecture
 - Data preprocessing pipeline
-- Scalable backend design
+- Probability-based prediction response
+- Input validation
+- Timeout handling for model inference
+- Clean layered backend architecture
 
 ---
 
@@ -221,8 +206,8 @@ POST /api/diabetes/predict
 - MySQL integration
 - Dashboard analytics
 - Docker deployment
-- Cloud deployment (AWS / Render)
-- Model improvement with hyperparameter tuning
+- Cloud deployment
+- Improved model tuning
 
 ---
 
@@ -234,4 +219,4 @@ Pima Indians Diabetes Dataset from the National Institute of Diabetes and Digest
 
 # Author
 
-Developed as a Machine Learning + Full Stack project using React, Spring Boot, and Python ML integration.
+Sriram D
