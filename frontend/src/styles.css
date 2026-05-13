@@ -1,0 +1,284 @@
+:root {
+  color: #183033;
+  background: #f5f8f8;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 40px clamp(18px, 4vw, 64px);
+  background:
+    linear-gradient(135deg, rgba(20, 122, 113, 0.14), transparent 34%),
+    linear-gradient(315deg, rgba(179, 74, 91, 0.11), transparent 30%),
+    #f6faf9;
+}
+
+.intro {
+  max-width: 1040px;
+  margin: 0 auto 30px;
+}
+
+.brand-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #245a58;
+  font-weight: 700;
+}
+
+.brand-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 8px;
+  color: white;
+  background: #16766f;
+}
+
+h1 {
+  max-width: 780px;
+  margin: 22px 0 12px;
+  font-size: clamp(2.25rem, 5vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.intro p {
+  max-width: 720px;
+  margin: 0;
+  color: #526568;
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  max-width: 1040px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.input-panel,
+.result-panel {
+  border: 1px solid #dce7e5;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 20px 60px rgba(31, 55, 61, 0.08);
+}
+
+.input-panel {
+  padding: clamp(18px, 3vw, 28px);
+}
+
+.panel-heading {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  color: #16766f;
+}
+
+.panel-heading h2 {
+  margin: 0;
+  color: #183033;
+  font-size: 1.2rem;
+}
+
+.panel-heading p {
+  margin: 4px 0 0;
+  color: #647477;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field span {
+  display: flex;
+  min-height: 22px;
+  justify-content: space-between;
+  gap: 12px;
+  color: #33484b;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.field small {
+  color: #78898b;
+  font-weight: 600;
+}
+
+.field input {
+  width: 100%;
+  height: 46px;
+  border: 1px solid #cbdcda;
+  border-radius: 6px;
+  padding: 0 12px;
+  color: #183033;
+  background: white;
+  outline: none;
+}
+
+.field input:focus {
+  border-color: #16766f;
+  box-shadow: 0 0 0 3px rgba(22, 118, 111, 0.14);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 112px;
+  height: 44px;
+  border: 0;
+  border-radius: 6px;
+  color: white;
+  background: #16766f;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+button.secondary {
+  color: #245a58;
+  border: 1px solid #cbdcda;
+  background: white;
+}
+
+.error {
+  margin-top: 18px;
+  border-left: 4px solid #b33f4f;
+  padding: 12px 14px;
+  color: #8f2737;
+  background: #fff2f4;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.result-panel {
+  position: sticky;
+  top: 24px;
+  min-height: 280px;
+  padding: 24px;
+}
+
+.result-label {
+  display: block;
+  margin-bottom: 22px;
+  color: #647477;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.result-panel strong {
+  display: block;
+  color: #16766f;
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.result-panel.risk strong {
+  color: #b33f4f;
+}
+
+.score {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 26px 0;
+  padding: 16px 0;
+  border-top: 1px solid #dce7e5;
+  border-bottom: 1px solid #dce7e5;
+}
+
+.score span {
+  color: #526568;
+  font-weight: 700;
+}
+
+.score b {
+  color: #183033;
+  font-size: 1.8rem;
+}
+
+.result-panel p {
+  margin: 0;
+  color: #526568;
+  line-height: 1.6;
+}
+
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 860px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .result-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 620px) {
+  .app-shell {
+    padding-top: 24px;
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+  }
+
+  button {
+    width: 100%;
+  }
+}

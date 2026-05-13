@@ -1,0 +1,4 @@
+#!/usr/bin/env pwsh
+# Gradle wrapper script for PowerShell
+# Usage: .\gradlew build, .\gradlew bootRun, etc.
+& gradle @args
